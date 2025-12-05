@@ -1,0 +1,5 @@
+res://player_anthill.gd
+res://main_scene.tscn
+res://enemy_spawner.gd
+res://enemy_ant.tscn
+res://enemy_ant.gd

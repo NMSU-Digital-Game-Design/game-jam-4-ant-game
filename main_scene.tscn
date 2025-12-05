@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://crpil0a0r2k8q"]
+
+[ext_resource type="Script" uid="uid://cl5omls8d5chd" path="res://player_anthill.gd" id="1_2c62f"]
+[ext_resource type="Texture2D" uid="uid://b55l5rwbfi54y" path="res://Assets/anthill_1.png" id="2_gyfs4"]
+[ext_resource type="Script" uid="uid://cf6clmynb2xp4" path="res://enemy_spawner.gd" id="3_gyfs4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d5x1h"]
+radius = 122.0
+
+[node name="MainScene" type="Node2D"]
+
+[node name="PlayerAnthill" type="Area2D" parent="."]
+script = ExtResource("1_2c62f")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerAnthill"]
+position = Vector2(179, 539)
+scale = Vector2(0.63055557, 0.65)
+texture = ExtResource("2_gyfs4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAnthill"]
+position = Vector2(174, 542)
+shape = SubResource("CircleShape2D_d5x1h")
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("3_gyfs4")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="FoodLabel" type="Label" parent="UI"]
+offset_left = 43.0
+offset_top = 1.0
+offset_right = 138.0
+offset_bottom = 28.0
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+offset_left = 44.0
+offset_top = 112.0
+offset_right = 175.0
+offset_bottom = 139.0
+value = 100.0
+
+[node name="UpgradeHealthButton" type="Button" parent="UI"]
+anchors_preset = -1
+anchor_right = 0.023000002
+anchor_bottom = 0.074
+offset_left = 41.0
+offset_top = 71.0
+offset_right = 149.504
+offset_bottom = 58.048
+text = "Upgrade Anthill"
+
+[connection signal="body_entered" from="PlayerAnthill" to="PlayerAnthill" method="_on_body_entered"]
+[connection signal="pressed" from="UI/UpgradeHealthButton" to="PlayerAnthill" method="_on_upgrade_health_button_pressed"]
