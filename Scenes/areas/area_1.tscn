@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3nbqofblpkr"]
+
+[ext_resource type="Texture2D" uid="uid://2x8u7pq0kfq" path="res://Assets/Backgrounds/game_background_3.png" id="1_48soa"]
+
+[node name="area1" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 3840.0
+offset_bottom = 2160.0
+texture = ExtResource("1_48soa")
+metadata/_edit_use_anchors_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(1880, 1038)
+scale = Vector2(229.987, 127.529)
+polygon = PackedVector2Array(7.4787, 5.07337, -6.62648, 5.07337, -6.72648, -4.61857, -6.30472, -4.03831, -6.26558, 4.39117, 7.02215, 4.42254, 7.02215, -3.64624, -6.32646, -3.96774)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnwfin6b0qhio"]
+
+[ext_resource type="Script" uid="uid://c74fmyp63qkpx" path="res://enemy_ant.gd" id="1_d8veo"]
+[ext_resource type="Texture2D" uid="uid://dq1sxe6ouphso" path="res://Assets/ant.jpg" id="1_vhamd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8veo"]
+size = Vector2(82, 74.75)
+
+[node name="EnemyAnt" type="CharacterBody2D"]
+script = ExtResource("1_d8veo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(845, 281)
+scale = Vector2(0.12307692, 0.11405526)
+texture = ExtResource("1_vhamd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(847, 283)
+shape = SubResource("RectangleShape2D_d8veo")
