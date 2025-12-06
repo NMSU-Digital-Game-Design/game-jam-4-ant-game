@@ -1,5 +1,5 @@
-res://player_anthill.gd
-res://main_scene.tscn
-res://enemy_spawner.gd
 res://enemy_ant.tscn
-res://enemy_ant.gd
+res://Scenes/main_scene.tscn
+res://Scenes/areas/area_1.tscn
+res://Scenes/enemy_ant.tscn
+res://Scripts/enemy_spawner.gd

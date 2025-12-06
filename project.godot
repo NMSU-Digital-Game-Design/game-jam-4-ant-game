@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Ant Game"
-run/main_scene="uid://crpil0a0r2k8q"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+run/main_scene="uid://c3nbqofblpkr"
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [rendering]

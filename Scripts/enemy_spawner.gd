@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var spawn_interval = 2.0
-var EnemyAntScene = preload("res://enemy_ant.tscn")
+var EnemyAntScene = preload("res://Scenes/enemy_ant.tscn")
 
 func _ready():
 	var timer = Timer.new()
