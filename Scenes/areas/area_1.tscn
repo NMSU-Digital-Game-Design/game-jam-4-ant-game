@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3nbqofblpkr"]
+
+[ext_resource type="Texture2D" uid="uid://2x8u7pq0kfq" path="res://Assets/Backgrounds/game_background_3.png" id="1_48soa"]
+[ext_resource type="PackedScene" uid="uid://bfab40echk0f8" path="res://Scenes/camera_manager.tscn" id="2_i7wiy"]
+[ext_resource type="PackedScene" uid="uid://crpil0a0r2k8q" path="res://Scenes/main_scene.tscn" id="2_qvwxv"]
+[ext_resource type="PackedScene" uid="uid://bnwfin6b0qhio" path="res://Scenes/enemy_ant.tscn" id="3_i7wiy"]
+
+[node name="area1" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.225
+anchor_top = 0.125
+anchor_right = 0.225
+anchor_bottom = 0.125
+offset_right = 3840.0
+offset_bottom = 2160.0
+texture = ExtResource("1_48soa")
+metadata/_edit_use_anchors_ = true
+
+[node name="camera_manager" parent="." instance=ExtResource("2_i7wiy")]
+position = Vector2(864, 736)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(1948.5, 1097.5)
+scale = Vector2(195.85, 110.75)
+polygon = PackedVector2Array(-8.9686, -0.663657, 8.35078, -0.663657, 8.35078, -7.67043, -8.9686, -7.59819, -9.29538, -8.24831, 8.67756, -8.17607, 8.67756, -0.0135441, -9.29538, -0.0857792, -9.29538, -8.24831, -8.9686, -7.59819)
+
+[node name="PlayerAnthill" parent="." instance=ExtResource("2_qvwxv")]
+position = Vector2(248, 392)
+
+[node name="EnemyAnt" parent="." instance=ExtResource("3_i7wiy")]
+position = Vector2(1280, 696)
