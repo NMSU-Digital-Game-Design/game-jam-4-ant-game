@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3nbqofblpkr"]
+[gd_scene load_steps=5 format=3 uid="uid://c3nbqofblpkr"]
 
 [ext_resource type="Texture2D" uid="uid://2x8u7pq0kfq" path="res://Assets/Backgrounds/game_background_3.png" id="1_48soa"]
+[ext_resource type="PackedScene" uid="uid://bfab40echk0f8" path="res://Scenes/camera_manager.tscn" id="2_i7wiy"]
 [ext_resource type="PackedScene" uid="uid://crpil0a0r2k8q" path="res://Scenes/main_scene.tscn" id="2_qvwxv"]
 [ext_resource type="PackedScene" uid="uid://bnwfin6b0qhio" path="res://Scenes/enemy_ant.tscn" id="3_i7wiy"]
 
@@ -25,6 +26,9 @@ offset_bottom = 2160.0
 texture = ExtResource("1_48soa")
 metadata/_edit_use_anchors_ = true
 
+[node name="camera_manager" parent="." instance=ExtResource("2_i7wiy")]
+position = Vector2(864, 736)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
@@ -37,6 +41,3 @@ position = Vector2(248, 392)
 
 [node name="EnemyAnt" parent="." instance=ExtResource("3_i7wiy")]
 position = Vector2(1280, 696)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(541, 800)
