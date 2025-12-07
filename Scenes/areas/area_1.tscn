@@ -7,24 +7,9 @@
 
 [node name="area1" type="Node2D"]
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.225
-anchor_top = 0.125
-anchor_right = 0.225
-anchor_bottom = 0.125
-offset_right = 3840.0
-offset_bottom = 2160.0
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1924, 1083)
 texture = ExtResource("1_48soa")
-metadata/_edit_use_anchors_ = true
 
 [node name="camera_manager" parent="." instance=ExtResource("2_i7wiy")]
 position = Vector2(864, 736)
