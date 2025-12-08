@@ -1,5 +1,5 @@
-res://Scenes/main.tscn
-res://Scenes/camera.gd
 res://Scenes/enemy_ant.tscn
+res://Scenes/main.tscn
 res://Scenes/ant_hill.tscn
 res://Scenes/camera_manager.tscn
+res://Scenes/camera.gd

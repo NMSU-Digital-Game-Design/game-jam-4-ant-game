@@ -28,9 +28,9 @@ script = ExtResource("3_iacmt")
 
 [node name="FoodLabel" type="Label" parent="UI"]
 offset_left = 43.0
-offset_top = 1.0
+offset_top = 37.0
 offset_right = 138.0
-offset_bottom = 28.0
+offset_bottom = 64.0
 
 [node name="HealthBar" type="ProgressBar" parent="UI"]
 offset_left = 44.0
