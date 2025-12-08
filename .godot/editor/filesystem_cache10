@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1765157001
+::res://::1765157314
 icon.svg::CompressedTexture2D/CompressedTexture2D::4927892616536376653::1765040027::1765040054::1::::<><><>0<>0<>08dc75f2026aa19402f6e51330cf8f97<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile/TextFile::-1::1765039927::0::1::::<><><>0<>0<><>::
 ::res://ant-game/::1765040027
@@ -8,11 +8,11 @@ ant.jpg::CompressedTexture2D/CompressedTexture2D::8337091608668742854::176504002
 anthill_1.png::CompressedTexture2D/CompressedTexture2D::4554739713128560666::1765040027::1765040054::1::::<><><>0<>0<>7c92663c8284ed73e1b05b9c64e631ad<>res://.godot/imported/anthill_1.png-8ad5b1effb0744bca5c52720c19e1a5b.ctex::
 ::res://Assets/Backgrounds/::1765040055
 game_background_3.png::CompressedTexture2D/CompressedTexture2D::57194721996755466::1765040027::1765040055::1::::<><><>0<>0<>277c744ff9f994a191cb5f127d2fc5fe<>res://.godot/imported/game_background_3.png-bf321c822365bd7fbce1611127ea4bf7.ctex::
-::res://Scenes/::1765157001
-AntHill.tscn::PackedScene::5997524069462165666::1765156453::0::1::::<><><>0<>0<><>::uid://cl5omls8d5chd::::res://Scripts/player_anthill.gd<>uid://b55l5rwbfi54y::::res://Assets/anthill_1.png<>uid://cf6clmynb2xp4::::res://Scripts/enemy_spawner.gd
-camera_manager.tscn::PackedScene/PackedScene::2737478726262890031::1765156453::0::1::::<><><>0<>0<><>::uid://cshsoe663r7gn::::res://Scripts/camera_manager.gd
-enemy_ant.tscn::PackedScene/PackedScene::3344610563663878442::1765156453::0::1::::<><><>0<>0<><>::uid://c74fmyp63qkpx::::res://Scripts/enemy_ant.gd<>uid://dq1sxe6ouphso::::res://Assets/ant.jpg
-main.tscn::PackedScene::198972233319435049::1765157013::0::1::::<><><>0<>0<><>::uid://2x8u7pq0kfq::::res://Assets/Backgrounds/game_background_3.png<>uid://bfab40echk0f8::::res://Scenes/camera_manager.tscn<>uid://crpil0a0r2k8q::::res://Scenes/AntHill.tscn<>uid://bnwfin6b0qhio::::res://Scenes/enemy_ant.tscn
+::res://Scenes/::1765157027
+ant_hill.tscn::PackedScene::5997524069462165666::1765157027::0::1::::<><><>0<>0<><>::uid://cl5omls8d5chd::::res://Scripts/player_anthill.gd<>uid://b55l5rwbfi54y::::res://Assets/anthill_1.png<>uid://cf6clmynb2xp4::::res://Scripts/enemy_spawner.gd
+camera_manager.tscn::PackedScene::2737478726262890031::1765156453::0::1::::<><><>0<>0<><>::uid://cshsoe663r7gn::::res://Scripts/camera_manager.gd
+enemy_ant.tscn::PackedScene::3344610563663878442::1765156453::0::1::::<><><>0<>0<><>::uid://c74fmyp63qkpx::::res://Scripts/enemy_ant.gd<>uid://dq1sxe6ouphso::::res://Assets/ant.jpg
+main.tscn::PackedScene::198972233319435049::1765157013::0::1::::<><><>0<>0<><>::uid://2x8u7pq0kfq::::res://Assets/Backgrounds/game_background_3.png<>uid://bfab40echk0f8::::res://Scenes/camera_manager.tscn<>uid://crpil0a0r2k8q::::res://Scenes/ant_hill.tscn<>uid://bnwfin6b0qhio::::res://Scenes/enemy_ant.tscn
 ::res://Scripts/::1765041142
 camera_2d.gd::GDScript/GDScript::9135397221391490179::1765040027::0::1::::<>Camera2D<><>0<>0<><>::
 camera_manager.gd::GDScript/GDScript::6051809363562626753::1765040390::0::1::::<>Node2D<><>0<>0<><>::

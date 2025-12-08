@@ -1,21 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://c3nbqofblpkr"]
 
 [ext_resource type="Texture2D" uid="uid://2x8u7pq0kfq" path="res://Assets/Backgrounds/game_background_3.png" id="1_jjvhh"]
-[ext_resource type="PackedScene" uid="uid://bfab40echk0f8" path="res://Scenes/camera_manager.tscn" id="2_kry3j"]
 [ext_resource type="PackedScene" uid="uid://crpil0a0r2k8q" path="res://Scenes/ant_hill.tscn" id="3_21xkr"]
 [ext_resource type="PackedScene" uid="uid://bnwfin6b0qhio" path="res://Scenes/enemy_ant.tscn" id="4_6bp64"]
+[ext_resource type="Script" uid="uid://di43sbogcxnqb" path="res://Scenes/camera.gd" id="4_jjvhh"]
 
-[node name="area1" type="Node2D"]
+[node name="main" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1921, 1091)
 texture = ExtResource("1_jjvhh")
-
-[node name="camera_manager" parent="." instance=ExtResource("2_kry3j")]
-position = Vector2(864, 736)
 
 [node name="PlayerAnthill" parent="." instance=ExtResource("3_21xkr")]
 position = Vector2(248, 392)
 
 [node name="EnemyAnt" parent="." instance=ExtResource("4_6bp64")]
 position = Vector2(1280, 696)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_jjvhh")
