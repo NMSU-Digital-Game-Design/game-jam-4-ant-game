@@ -14,7 +14,8 @@ var food = 0
 # --- Upgrade Settings ---
 @export var upgrade_cost = 100
 @export var upgrade_health_increase = 50
-@export var upgrade_scale_increase = Vector2(0.5, 0.5)  # bigger increment for visibility
+@export var upgrade_scale_increase = Vector2(0.01, 0.01)  # bigger increment for visibility
+@onready var sprite = $Sprite2D
 
 func _ready():
 	set_process(true)
@@ -28,7 +29,19 @@ func _ready():
 		health_bar.value = health
 	if food_label:
 		food_label.text = "Food: " + str(floor(food))
+	
+	if sprite and sprite.texture:
+		var tex_size = sprite.texture.get_size()
+		var bottom_center = Vector2(tex_size.x / 2, tex_size.y)  # local coords
 
+		# Move the sprite up so its bottom aligns with Area2D origin
+		sprite.position = -bottom_center
+		sprite.centered = true  # you can keep it centered now, looks cleaner
+
+		# Optional: if your collision shape is a child, move it too!
+		if has_node("CollisionShape2D"):
+			$CollisionShape2D.position = -bottom_center
+	
 	# Connect the upgrade button dynamically 
 	if upgrade_health_button:
 		var callback = Callable(self, "_on_upgrade_health_pressed")

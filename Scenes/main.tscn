@@ -16,20 +16,18 @@ position = Vector2(1921, 1091)
 texture = ExtResource("1_jjvhh")
 
 [node name="PlayerAnthill" type="Area2D" parent="."]
-position = Vector2(248, 392)
+position = Vector2(557, 1290)
 script = ExtResource("2_kry3j")
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerAnthill"]
-position = Vector2(179, 539)
+position = Vector2(0.500061, 0)
 scale = Vector2(0.630556, 0.65)
 texture = ExtResource("3_21xkr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAnthill"]
-position = Vector2(174, 542)
 shape = SubResource("CircleShape2D_d5x1h")
 
 [node name="EnemySpawner" type="Node2D" parent="."]
-position = Vector2(45, 1081)
 script = ExtResource("4_6bp64")
 
 [node name="Camera2D" type="Camera2D" parent="."]
