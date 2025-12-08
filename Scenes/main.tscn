@@ -48,6 +48,12 @@ offset_right = 175.0
 offset_bottom = 139.0
 value = 100.0
 
+[node name="HealthLabel" type="Label" parent="UI"]
+offset_left = 67.0
+offset_top = 143.0
+offset_right = 107.0
+offset_bottom = 166.0
+
 [node name="UpgradeHealthButton" type="Button" parent="UI"]
 anchors_preset = -1
 anchor_right = 0.023

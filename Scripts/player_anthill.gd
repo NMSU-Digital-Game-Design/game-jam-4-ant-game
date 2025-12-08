@@ -10,6 +10,7 @@ var food = 0
 @onready var health_bar = $"/root/main/UI/HealthBar"
 @onready var food_label = $"/root/main/UI/FoodLabel"
 @onready var upgrade_health_button = $"/root/main/UI/UpgradeHealthButton"
+@onready var health_label = $"/root/main/UI/HealthLabel"
 
 # --- Upgrade Settings ---
 @export var upgrade_cost = 100
@@ -62,6 +63,9 @@ func _process(delta):
 	health = clamp(health, 0, max_health)
 	if health_bar:
 		health_bar.value = health
+	
+	if health_label:
+		health_label.text = "%d / %d" % [health, max_health]
 
 	# Check death
 	if health <= 0:
@@ -85,6 +89,7 @@ func _on_upgrade_health_pressed():
 	if food >= upgrade_cost:
 		print("Enough food to upgrade!")
 		food -= upgrade_cost
+		food_per_second += 1
 		max_health += upgrade_health_increase
 		health += upgrade_health_increase
 		scale += upgrade_scale_increase  # visually make anthill bigger
