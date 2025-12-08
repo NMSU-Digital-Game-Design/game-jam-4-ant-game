@@ -15,5 +15,5 @@ func _ready():
 func _spawn_enemy_ant():
 	print("Spawning enemy ant")
 	var ant = EnemyAntScene.instantiate()
-	ant.position = Vector2(600, 300)  # adjust lane Y if needed
+	ant.position = Vector2(600, 700)  # adjust lane Y if needed
 	get_parent().add_child(ant)

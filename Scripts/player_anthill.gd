@@ -7,9 +7,9 @@ var food = 0
 @export var food_per_second = 5
 
 # --- UI References ---
-@onready var health_bar = $"/root/MainScene/UI/HealthBar"
-@onready var food_label = $"/root/MainScene/UI/FoodLabel"
-@onready var upgrade_health_button = $"/root/MainScene/UI/UpgradeHealthButton"
+@onready var health_bar = $"/root/main/UI/HealthBar"
+@onready var food_label = $"/root/main/UI/FoodLabel"
+@onready var upgrade_health_button = $"/root/main/UI/UpgradeHealthButton"
 
 # --- Upgrade Settings ---
 @export var upgrade_cost = 100

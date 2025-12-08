@@ -4,8 +4,8 @@ extends Camera2D
 @export var scroll_speed: float = 1000.0  # Pixels per second for edge scrolling
 @export var drag_speed: float = 1.0      # Multiplier for middle mouse drag speed
 @export var zoom_speed: float = 0.1      # How much to zoom per wheel tick
-@export var zoom_min: float = 0.5        # Minimum zoom level (e.g., zoomed out)
-@export var zoom_max: float = 2.0        # Maximum zoom level (e.g., zoomed in)
+@export var zoom_min: float = 0.75        # Minimum zoom level (e.g., zoomed out)
+@export var zoom_max: float = 1.3        # Maximum zoom level (e.g., zoomed in)
 @export var position_limits: Rect2 = Rect2(800, 700, 1000, 100)  # Camera position bounds (x, y, width, height)
 @export var starting_position: Vector2 = Vector2(800, 700)  # Initial camera position
 
@@ -46,10 +46,10 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	# Zoom with mouse wheel
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			zoom -= Vector2(zoom_speed, zoom_speed)
 			zoom = zoom.clamp(Vector2(zoom_min, zoom_min), Vector2(zoom_max, zoom_max))
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			zoom += Vector2(zoom_speed, zoom_speed)
 			zoom = zoom.clamp(Vector2(zoom_min, zoom_min), Vector2(zoom_max, zoom_max))
 		
