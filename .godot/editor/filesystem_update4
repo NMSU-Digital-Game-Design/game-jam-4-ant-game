@@ -1,7 +1,8 @@
 res://Scenes/enemy_ant.tscn
 res://Scenes/main.tscn
-res://Scenes/ant_hill.tscn
-res://Scenes/camera_manager.tscn
-res://Scenes/camera.gd
-res://Scripts/player_anthill.gd
+res://Scenes/Ant.tscn
+res://Scenes/Ant.gd
 res://Scripts/enemy_spawner.gd
+res://Scripts/Ant.gd
+res://Scripts/ant_spawner.gd
+res://Scenes/ant_hill.tscn

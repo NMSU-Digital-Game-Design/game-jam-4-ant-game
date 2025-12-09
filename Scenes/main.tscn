@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://2x8u7pq0kfq" path="res://Assets/Backgrounds/game_background_3.png" id="1_jjvhh"]
 [ext_resource type="Script" uid="uid://cl5omls8d5chd" path="res://Scripts/player_anthill.gd" id="2_kry3j"]
 [ext_resource type="Texture2D" uid="uid://b55l5rwbfi54y" path="res://Assets/anthill_1.png" id="3_21xkr"]
-[ext_resource type="Script" uid="uid://cf6clmynb2xp4" path="res://Scripts/enemy_spawner.gd" id="4_6bp64"]
-[ext_resource type="Script" uid="uid://di43sbogcxnqb" path="res://Scenes/camera.gd" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://cf6clmynb2xp4" path="res://Scripts/ant_spawner.gd" id="4_6bp64"]
+[ext_resource type="Script" uid="uid://di43sbogcxnqb" path="res://Scripts/camera.gd" id="4_jjvhh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5x1h"]
 radius = 122.0
@@ -14,6 +14,9 @@ radius = 122.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1921, 1091)
 texture = ExtResource("1_jjvhh")
+
+[node name="AntSpawner" type="Node2D" parent="."]
+script = ExtResource("4_6bp64")
 
 [node name="PlayerAnthill" type="Area2D" parent="."]
 position = Vector2(557, 1290)
@@ -26,9 +29,6 @@ texture = ExtResource("3_21xkr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAnthill"]
 shape = SubResource("CircleShape2D_d5x1h")
-
-[node name="EnemySpawner" type="Node2D" parent="."]
-script = ExtResource("4_6bp64")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_jjvhh")

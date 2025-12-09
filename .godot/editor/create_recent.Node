@@ -1,11 +1,12 @@
+ProgressBar
 Label
-Camera2D
-Sprite2D
-CollisionPolygon2D
+Node
 CollisionShape2D
 Area2D
+Sprite2D
 CharacterBody2D
+Camera2D
+CollisionPolygon2D
 Button
-ProgressBar
 CanvasLayer
 Node2D
