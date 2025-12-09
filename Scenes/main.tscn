@@ -96,3 +96,13 @@ offset_top = 71.0
 offset_right = 149.504
 offset_bottom = 58.048
 text = "Upgrade Anthill"
+
+[node name="Ant" type="Button" parent="UI"]
+offset_left = 23.0
+offset_top = 532.0
+offset_right = 220.0
+offset_bottom = 619.0
+text = "Ant"
+
+[connection signal="pressed" from="UI/UpgradeHealthButton" to="PlayerAnthill/PlayerAnthill" method="_on_upgrade_health_button_pressed"]
+[connection signal="pressed" from="UI/Ant" to="PlayerAnthill/PlayerAnthill" method="_on_ant_pressed"]

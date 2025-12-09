@@ -20,7 +20,7 @@ func _ready():
 		return
 	
 	# Setup auto-spawn timer (only for AI, or both if desired)
-	if team == Team.ENEMY or team == Team.PLAYER:  # Change later if player shouldn't auto-spawn
+	if team == Team.ENEMY:  # Change later if player shouldn't auto-spawn
 		timer = Timer.new()
 		timer.wait_time = spawn_interval
 		timer.autostart = true
@@ -28,15 +28,6 @@ func _ready():
 		add_child(timer)
 
 func spawn_now():  # Called by UI button (only player)
-	if team != Team.PLAYER:
-		return
-	if not anthill or not anthill.has_method("get_food"):
-		return
-	if anthill.food < ant_cost:
-		print("Not enough food!")
-		return
-	
-	anthill.food -= ant_cost
 	_do_spawn()
 
 func _auto_spawn():

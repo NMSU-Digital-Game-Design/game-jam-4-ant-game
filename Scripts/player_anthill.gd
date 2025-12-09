@@ -19,6 +19,9 @@ enum Team { PLAYER, ENEMY }
 @export var upgrade_damage_bonus : float = 8
 @export var upgrade_rate_bonus : float = 0.2
 
+# troop costs
+@export var ant_cost : int = 20
+
 var health : float
 var food : float = 0
 var fire_timer : float = 0.0
@@ -95,6 +98,16 @@ func upgrade():
 	scale += Vector2(0.03, 0.03)
 	if team == Team.PLAYER:
 		update_ui()
+		
+# player ant spawn
+func deploy():
+	var ant_spawner = get_parent().get_node("AntSpawner")
+	
+	if food < ant_cost:
+		print("Not enough food!")
+		return
+	food -= ant_cost
+	ant_spawner.spawn_now()
 
 # ---------- UI (Player only) ----------
 func update_ui():
@@ -118,3 +131,7 @@ func _on_body_entered(body):
 	if body.is_in_group("ant") and body.team != team:
 		take_damage(body.damage)
 		body.queue_free()   # ant sacrifices itself when it reaches the hill
+
+# base ant deployment
+func _on_ant_pressed() -> void:
+	deploy()
