@@ -6,8 +6,8 @@ extends Camera2D
 @export var zoom_speed: float = 0.1      # How much to zoom per wheel tick
 @export var zoom_min: float = 0.75        # Minimum zoom level (e.g., zoomed out)
 @export var zoom_max: float = 1.3        # Maximum zoom level (e.g., zoomed in)
-@export var position_limits: Rect2 = Rect2(800, 700, 1000, 100)  # Camera position bounds (x, y, width, height)
-@export var starting_position: Vector2 = Vector2(800, 700)  # Initial camera position
+@export var position_limits: Rect2 = Rect2(800, 800, 2000, 100)  # Camera position bounds (x, y, width, height)
+@export var starting_position: Vector2 = Vector2(800, 800)  # Initial camera position
 
 var is_dragging: bool = false
 var drag_start_pos: Vector2

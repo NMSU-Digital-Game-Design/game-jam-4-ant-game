@@ -1,107 +1,120 @@
+# Scripts/AnthillBase.gd
 extends Area2D
 
-# --- Anthill Stats ---
-@export var max_health = 100
-var health = max_health
-var food = 0
-@export var food_per_second = 5
+enum Team { PLAYER, ENEMY }
 
-# --- UI References ---
-@onready var health_bar = $"/root/main/UI/HealthBar"
-@onready var food_label = $"/root/main/UI/FoodLabel"
-@onready var upgrade_health_button = $"/root/main/UI/UpgradeHealthButton"
-@onready var health_label = $"/root/main/UI/HealthLabel"
+@export var team : Team = Team.PLAYER
+@export var max_health : float = 500
+@export var food_per_second : float = 5
 
-# --- Upgrade Settings ---
-@export var upgrade_cost = 100
-@export var upgrade_health_increase = 50
-@export var upgrade_scale_increase = Vector2(0.01, 0.01)  # bigger increment for visibility
-@onready var sprite = $Sprite2D
+# ----- Weapon -----
+@export var projectile_scene : PackedScene = preload("res://Scenes/Projectile.tscn")
+@export var weapon_damage : float = 15
+@export var weapon_range : float = 400
+@export var weapon_fire_rate : float = 1.2   # shots per second
+
+# ----- Upgrade -----
+@export var upgrade_cost : int = 100
+@export var upgrade_health_bonus : int = 150
+@export var upgrade_damage_bonus : float = 8
+@export var upgrade_rate_bonus : float = 0.2
+
+var health : float
+var food : float = 0
+var fire_timer : float = 0.0
+
+@onready var weapon_area : Area2D = $WeaponRange
+@onready var sprite : Sprite2D = $Sprite2D
+
+var enemies_in_range : Array[Node2D] = []
 
 func _ready():
-	set_process(true)
-
-	# For testing, start with enough food to upgrade
-	food = 200
-
-	# Initialize UI
-	if health_bar:
-		health_bar.max_value = max_health
-		health_bar.value = health
-	if food_label:
-		food_label.text = "Food: " + str(floor(food))
+	health = max_health
 	
-	if sprite and sprite.texture:
-		var tex_size = sprite.texture.get_size()
-		var bottom_center = Vector2(tex_size.x / 2, tex_size.y)  # local coords
-
-		# Move the sprite up so its bottom aligns with Area2D origin
-		sprite.position = -bottom_center
-		sprite.centered = true  # you can keep it centered now, looks cleaner
-
-		# Optional: if your collision shape is a child, move it too!
-		if has_node("CollisionShape2D"):
-			$CollisionShape2D.position = -bottom_center
+	# Set correct collision layers so only enemy ants trigger body_entered
+	collision_layer = 8 if team == Team.PLAYER else 16   # layer 8 = player hill, 16 = enemy hill
+	collision_mask  = 4 if team == Team.PLAYER else 2    # detect enemy ants only
 	
-	# Connect the upgrade button dynamically 
-	if upgrade_health_button:
-		var callback = Callable(self, "_on_upgrade_health_pressed")
-		if not upgrade_health_button.is_connected("pressed", callback):
-			upgrade_health_button.pressed.connect(callback)
-		print("Upgrade button connected!")
-	else:
-		print("Upgrade button NOT assigned!")
-
+	# Weapon detection area
+	$WeaponRange/CollisionShape2D.shape.radius = weapon_range
+	$WeaponRange.collision_mask = 4 if team == Team.PLAYER else 2
+	
+	# UI (only player hill needs it for now)
+	if team == Team.PLAYER:
+		update_ui()
 
 func _process(delta):
-	# Increase food over time
-	food += food_per_second * delta
-	if food_label:
-		food_label.text = "Food: " + str(floor(food))
-
-	# Clamp health and update health bar
-	health = clamp(health, 0, max_health)
-	if health_bar:
-		health_bar.value = health
+	# Food income
+	if team == Team.PLAYER:
+		food += food_per_second * delta
+		update_ui()
 	
-	if health_label:
-		health_label.text = "%d / %d" % [health, max_health]
+	# Weapon
+	fire_timer -= delta
+	if fire_timer <= 0 and enemies_in_range.size() > 0:
+		fire_at_nearest()
+		fire_timer = 1.0 / weapon_fire_rate
 
-	# Check death
-	if health <= 0:
-		_die()
+func fire_at_nearest():
+	var nearest = null
+	var best_dist = INF
+	for e in enemies_in_range:
+		var d = global_position.distance_squared_to(e.global_position)
+		if d < best_dist:
+			best_dist = d
+			nearest = e
+	if nearest:
+		var proj = projectile_scene.instantiate()
+		get_tree().current_scene.add_child(proj)
+		proj.global_position = global_position
+		proj.direction = (nearest.global_position - global_position).normalized()
+		proj.damage = weapon_damage
+		proj.team = team
 
-func _on_body_entered(body):
-	if body.is_in_group("enemy_ant"):
-		take_damage(10)
-		body.queue_free()
-
-func take_damage(amount):
+# ---------- Damage & Death ----------
+func take_damage(amount : float):
 	health -= amount
-	health = clamp(health, 0, max_health)
-	if health_bar:
-		health_bar.value = health
-	print("Anthill health:", health)
+	health = maxf(0, health)
+	if team == Team.PLAYER:
+		update_ui()
+	if health <= 0:
+		die()
 
-# --- Upgrade Anthill ---
-func _on_upgrade_health_pressed():
-	print("Upgrade button clicked! Food:", food)
-	if food >= upgrade_cost:
-		print("Enough food to upgrade!")
-		food -= upgrade_cost
-		food_per_second += 1
-		max_health += upgrade_health_increase
-		health += upgrade_health_increase
-		scale += upgrade_scale_increase  # visually make anthill bigger
-		if health_bar:
-			health_bar.max_value = max_health
-			health_bar.value = health
-		if food_label:
-			food_label.text = "Food: " + str(floor(food))
-		print("Anthill upgraded! Max health:", max_health)
-	else:
-		print("Not enough food to upgrade!")
-
-func _die():
-	print("Anthill destroyed! Game Over.")
+func die():
+	print("Anthill destroyed! Team: ", "Player" if team == Team.PLAYER else "Enemy")
 	queue_free()
+
+# ---------- Upgrades (Player only) ----------
+func upgrade():
+	if food < upgrade_cost: return
+	food -= upgrade_cost
+	max_health += upgrade_health_bonus
+	health += upgrade_health_bonus
+	weapon_damage += upgrade_damage_bonus
+	weapon_fire_rate += upgrade_rate_bonus
+	scale += Vector2(0.03, 0.03)
+	if team == Team.PLAYER:
+		update_ui()
+
+# ---------- UI (Player only) ----------
+func update_ui():
+	var ui = get_node_or_null("/root/main/UI")
+	if ui:
+		ui.get_node("FoodLabel").text = "Food: " + str(int(food))
+		ui.get_node("HealthBar").max_value = max_health
+		ui.get_node("HealthBar").value = health
+		ui.get_node("HealthLabel").text = "%d / %d" % [health, max_health]
+
+# ---------- Weapon range signals ----------
+func _on_weapon_range_body_entered(body):
+	if body.is_in_group("ant") and body.team != team:
+		enemies_in_range.append(body)
+
+func _on_weapon_range_body_exited(body):
+	enemies_in_range.erase(body)
+
+# ---------- Enemy ants hitting the hill ----------
+func _on_body_entered(body):
+	if body.is_in_group("ant") and body.team != team:
+		take_damage(body.damage)
+		body.queue_free()   # ant sacrifices itself when it reaches the hill

@@ -11,6 +11,11 @@ radius = 122.0
 
 [node name="PlayerAnthill" type="Area2D" parent="."]
 script = ExtResource("1_jv6wh")
+max_health = null
+food_per_second = null
+upgrade_cost = null
+upgrade_health_increase = null
+upgrade_scale_increase = null
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerAnthill"]
 position = Vector2(179, 539)

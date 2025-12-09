@@ -1,33 +1,57 @@
+# ant_spawner.gd
 extends Node2D
 
 enum Team { PLAYER, ENEMY }
-@export var team: Team
-@export var ant_scene: PackedScene = preload("res://Scenes/Ant.tscn")
-@export var spawn_interval: float = 2.0  # AI auto-spawn
-@export var spawn_offset: Vector2 = Vector2(550, 900)  # Right/left of hill
-@export var ant_cost: float = 20.0  # Player deducts from anthill food
+@export var team: Team = Team.PLAYER
 
+@export var ant_scene: PackedScene = preload("res://Scenes/Ant.tscn")
+@export var spawn_interval: float = 2.0
+@export var spawn_offset: Vector2 = Vector2(100, 0)  # Relative to hill
+@export var ant_cost: float = 20.0
+
+var anthill: Node2D  # Will reference parent anthill
 var timer: Timer
-var anthill: Node  # Auto-find or set
 
 func _ready():
-	timer = Timer.new()
-	timer.wait_time = spawn_interval
-	timer.timeout.connect(_auto_spawn)
-	add_child(timer)
-	timer.start()
-	anthill = get_parent().get_node("PlayerAnthill") if team == Team.PLAYER else get_parent().get_node("EnemyAnthill")
+	# Parent MUST be the anthill
+	anthill = get_parent()
+	if not anthill:
+		push_error("AntSpawner must be child of an Anthill!")
+		return
+	
+	# Setup auto-spawn timer (only for AI, or both if desired)
+	if team == Team.ENEMY or team == Team.PLAYER:  # Change later if player shouldn't auto-spawn
+		timer = Timer.new()
+		timer.wait_time = spawn_interval
+		timer.autostart = true
+		timer.timeout.connect(_auto_spawn)
+		add_child(timer)
 
-func spawn_now():  # Player button calls this
-	if team == Team.PLAYER and anthill.food < ant_cost: return
-	if team == Team.PLAYER: anthill.food -= ant_cost
+func spawn_now():  # Called by UI button (only player)
+	if team != Team.PLAYER:
+		return
+	if not anthill or not anthill.has_method("get_food"):
+		return
+	if anthill.food < ant_cost:
+		print("Not enough food!")
+		return
+	
+	anthill.food -= ant_cost
 	_do_spawn()
 
-func _auto_spawn():  # AI
+func _auto_spawn():
+	# Optional: Add food cost for AI too, or make AI free
 	_do_spawn()
 
 func _do_spawn():
+	if not ant_scene:
+		push_error("Ant scene not assigned!")
+		return
+	
 	var ant = ant_scene.instantiate()
 	ant.team = team
-	ant.global_position = global_position + spawn_offset * (1.0 if team == Team.PLAYER else -1.0)
-	get_parent().add_child(ant)
+	ant.global_position = global_position + spawn_offset * (1 if team == Team.PLAYER else -1)
+	
+	# Add to scene tree properly
+	get_tree().current_scene.add_child(ant)
+	# Or: anthill.get_parent().add_child(ant) if you prefer
