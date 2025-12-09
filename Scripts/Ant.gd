@@ -58,9 +58,9 @@ func _ready():
 	
 	update_debug_label()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity.x = direction * speed
-	move_and_slide()  # Now works perfectly — no more exploding ants!
+	move_and_slide()  
 
 func _process(delta):
 	attack_timer -= delta
