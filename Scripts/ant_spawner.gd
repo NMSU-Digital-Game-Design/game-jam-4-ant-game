@@ -30,7 +30,7 @@ func _ready():
 func spawn_now():  # Called by UI button (only player)
 	if team != Team.PLAYER:
 		return
-	if not anthill or not anthill.has_method("get_food"):
+	if not anthill:
 		return
 	if anthill.food < ant_cost:
 		print("Not enough food!")
