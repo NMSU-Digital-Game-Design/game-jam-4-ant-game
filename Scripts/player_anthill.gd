@@ -31,6 +31,7 @@ var fire_timer : float = 0.0
 
 var enemies_in_range : Array[Node2D] = []
 
+
 func _ready():
 	health = max_health
 	
@@ -41,6 +42,9 @@ func _ready():
 	# Weapon detection area
 	$WeaponRange/CollisionShape2D.shape.radius = weapon_range
 	$WeaponRange.collision_mask = 4 if team == Team.PLAYER else 2
+	
+	weapon_area.body_entered.connect(_on_weapon_range_body_entered)
+	weapon_area.body_exited.connect(_on_weapon_range_body_exited)
 	
 	# UI (only player hill needs it for now)
 	if team == Team.PLAYER:
@@ -73,6 +77,7 @@ func fire_at_nearest():
 		proj.direction = (nearest.global_position - global_position).normalized()
 		proj.damage = weapon_damage
 		proj.team = team
+		proj.collision_mask = 2 + 4
 
 # ---------- Damage & Death ----------
 func take_damage(amount : float):
@@ -120,7 +125,7 @@ func update_ui():
 
 # ---------- Weapon range signals ----------
 func _on_weapon_range_body_entered(body):
-	if body.is_in_group("ant") and body.team != team:
+	if (body.is_in_group("ant") or body.has_method("get_team")) and body.team != team:
 		enemies_in_range.append(body)
 
 func _on_weapon_range_body_exited(body):
