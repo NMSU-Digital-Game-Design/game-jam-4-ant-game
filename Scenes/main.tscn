@@ -21,13 +21,8 @@ texture = ExtResource("1_jjvhh")
 [node name="PlayerAnthill" type="Node2D" parent="."]
 position = Vector2(300, 900)
 
-[node name="PlayerAnthill" type="Area2D" parent="PlayerAnthill"]
+[node name="PlayerAnthill" type="StaticBody2D" parent="PlayerAnthill"]
 script = ExtResource("2_kry3j")
-max_health = null
-food_per_second = null
-upgrade_cost = null
-upgrade_health_increase = null
-upgrade_scale_increase = null
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerAnthill/PlayerAnthill"]
 scale = Vector2(0.630556, 0.65)
@@ -43,6 +38,30 @@ shape = SubResource("CircleShape2D_kry3j")
 
 [node name="AntSpawner" type="Node2D" parent="PlayerAnthill"]
 script = ExtResource("4_6bp64")
+spawn_interval = 5.0
+
+[node name="EnemyAnthill" type="Node2D" parent="."]
+position = Vector2(3400, 900)
+
+[node name="EnemyAnthill" type="StaticBody2D" parent="EnemyAnthill"]
+script = ExtResource("2_kry3j")
+team = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyAnthill/EnemyAnthill"]
+scale = Vector2(0.630556, 0.65)
+texture = ExtResource("3_21xkr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAnthill/EnemyAnthill"]
+shape = SubResource("CircleShape2D_d5x1h")
+
+[node name="WeaponRange" type="Area2D" parent="EnemyAnthill/EnemyAnthill"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAnthill/EnemyAnthill/WeaponRange"]
+shape = SubResource("CircleShape2D_kry3j")
+
+[node name="AntSpawner" type="Node2D" parent="EnemyAnthill"]
+script = ExtResource("4_6bp64")
+team = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_jjvhh")
@@ -77,5 +96,3 @@ offset_top = 71.0
 offset_right = 149.504
 offset_bottom = 58.048
 text = "Upgrade Anthill"
-
-[connection signal="body_entered" from="PlayerAnthill/PlayerAnthill" to="PlayerAnthill/PlayerAnthill" method="_on_body_entered"]

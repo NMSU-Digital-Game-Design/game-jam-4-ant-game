@@ -30,10 +30,10 @@ func _ready():
 	
 	if team == Team.PLAYER:
 		collision_layer = 2	  # I am a Player Ant
-		collision_mask  = 4	  # I only collide with Enemy Ants (layer 4)
+		collision_mask  = 4 | 16	  # I only collide with Enemy Ants (layer 4)
 	else:
 		collision_layer = 4	  # I am an Enemy Ant  
-		collision_mask  = 2	  # I only collide with Player Ants (layer 2) (4)
+		collision_mask  = 2 | 8	  # I only collide with Player Ants (layer 2) (4)
 
 	# === FIX 2: AttackArea should ONLY detect enemies (no friendly fire detection) ===
 	$AttackArea.collision_mask = 4 if team == Team.PLAYER else 2
@@ -50,6 +50,8 @@ func _ready():
 	health_bar.max_value = max_health
 	health_bar.value = health
 	
+	attack_shape.position.x = 127 * direction
+	attack_shape.position.y = 0
 	# Optional: flip sprite to face correct direction
 	if has_node("Sprite2D"):
 		$Sprite2D.flip_h = (team == Team.ENEMY)

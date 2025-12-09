@@ -1,5 +1,5 @@
 # Scripts/AnthillBase.gd
-extends Area2D
+extends StaticBody2D
 
 enum Team { PLAYER, ENEMY }
 
