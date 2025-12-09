@@ -5,7 +5,7 @@ enum Team { PLAYER, ENEMY }
 @export var team: Team = Team.PLAYER
 
 @export var ant_scene: PackedScene = preload("res://Scenes/Ant.tscn")
-@export var spawn_interval: float = 2.0
+@export var spawn_interval: float = 10.0
 @export var spawn_offset: Vector2 = Vector2(-200, 0)  # Relative to hill
 @export var ant_cost: float = 20.0
 
