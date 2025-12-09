@@ -31,12 +31,12 @@ func _ready():
 	if team == Team.PLAYER:
 		collision_layer = 2	  # I am a Player Ant
 		collision_mask  = 4 | 16	  # I only collide with Enemy Ants (layer 4)
+		$AttackArea.collision_mask = 4 | 16
 	else:
 		collision_layer = 4	  # I am an Enemy Ant  
 		collision_mask  = 2 | 8	  # I only collide with Player Ants (layer 2) (4)
+		$AttackArea.collision_mask = 2 | 8
 
-	# === FIX 2: AttackArea should ONLY detect enemies (no friendly fire detection) ===
-	$AttackArea.collision_mask = 4 if team == Team.PLAYER else 2
 	# So: Player ants detect only Enemy ants (layer 4), and vice versa
 
 	# Setup attack range
@@ -70,7 +70,7 @@ func _process(delta):
 
 # Now only enemies enter this — thanks to collision mask!
 func _on_body_entered(body):
-	if body.is_in_group("ant") or body.has_method("get_team"):  # safety
+	if body.is_in_group("ant") or body.has_method("take_damage"):  # safety
 		targets_in_range.append(body)
 
 func _on_body_exited(body):
