@@ -23,8 +23,14 @@ var attack_timer: float = 0.0
 @onready var attack_shape: CollisionShape2D = $AttackArea/AttackCollisionShape2D
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var debug_label: Label = $DebugLabel
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+
+func play_animation(name: String):
+	if anim.animation != name:
+		anim.play(name)
 
 func _ready():
+	_play_team_animation()
 	# Set movement direction based on team
 	direction = 1.0 if team == Team.PLAYER else -1.0
 	
@@ -55,7 +61,7 @@ func _ready():
 	# Optional: flip sprite to face correct direction
 	if has_node("Sprite2D"):
 		$Sprite2D.flip_h = (team == Team.ENEMY)
-	
+	anim.animation_finished.connect(_on_animation_finished)
 	update_debug_label()
 
 func _physics_process(_delta):
@@ -77,17 +83,22 @@ func _on_body_exited(body):
 	targets_in_range.erase(body)
 
 func attack_nearest_target():
-	if targets_in_range.is_empty(): return
+	if targets_in_range.is_empty(): 
+		return
 	
 	var nearest = targets_in_range[0]
 	for target in targets_in_range:
 		if global_position.distance_to(target.global_position) < global_position.distance_to(nearest.global_position):
 			nearest = target
 	
+	# Play the attack animation based on team
+	play_attack_animation()
+	
 	if ant_type == "melee":
 		nearest.take_damage(damage)
 	elif ant_type == "ranged" and projectile_scene:
 		_shoot_projectile(nearest.global_position)
+
 
 func _shoot_projectile(target_pos: Vector2):
 	var proj = projectile_scene.instantiate()
@@ -113,3 +124,23 @@ func update_debug_label():
 	if debug_label:
 		var team_name = "Player" if team == Team.PLAYER else "Enemy"
 		debug_label.text = "%d HP\n%s" % [health, team_name]
+
+func _play_team_animation():
+	var anim := $AnimatedSprite2D
+	if team == Team.PLAYER:
+		anim.play("walk_player")
+	else:
+		anim.play("walk_enemy")
+
+	anim.flip_h = (team == Team.ENEMY)
+	
+func play_attack_animation():
+	if team == Team.PLAYER:
+		anim.play("attack_player")
+	else:
+		anim.play("attack_enemy")
+		
+func _on_animation_finished():
+	# If the attack animation finished, go back to walking
+	if anim.animation.begins_with("attack"):
+		_play_team_animation()
