@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bc50q11x1ielh" path="res://Scenes/ui.gd" id="1_nf4gj"]
 [ext_resource type="Texture2D" uid="uid://c8ujhcbwpmiye" path="res://Assets/meat.png" id="1_ohol1"]
-[ext_resource type="Texture2D" uid="uid://dq1sxe6ouphso" path="res://Assets/ant.jpg" id="2_tanvq"]
+[ext_resource type="Texture2D" uid="uid://bissae1nbvx0t" path="res://Assets/ant.png" id="3_nf4gj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nf4gj"]
 font_size = 14
@@ -23,9 +23,9 @@ script = ExtResource("1_nf4gj")
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -107.0
+offset_top = -120.0
 offset_right = 137.0
-offset_bottom = 134.0
+offset_bottom = 120.0
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -89,7 +89,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "ddd"
 label_settings = SubResource("LabelSettings_nf4gj")
 horizontal_alignment = 1
 
@@ -167,13 +166,14 @@ offset_top = -1.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = -4
 
 [node name="TextureRect" type="TextureRect" parent="Panel/Margin/VBox/Summon/Button/VBoxContainer"]
-custom_minimum_size = Vector2(0, 69.55)
+custom_minimum_size = Vector2(0, 74.915)
 layout_mode = 2
-texture = ExtResource("2_tanvq")
-expand_mode = 1
+texture = ExtResource("3_nf4gj")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Margin/VBox/Summon/Button/VBoxContainer"]
 layout_mode = 2

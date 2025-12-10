@@ -1,8 +1,3 @@
 res://Scenes/main.tscn
-res://Scripts/player_anthill.gd
-res://Scenes/Ant.tscn
-res://Scenes/Projectile.tscn
 res://Scenes/ui.tscn
-res://Scenes/main.gd
-res://Scenes/game_over_screen.tscn
-res://Scenes/game_over_screen.gd
+res://Scenes/Projectile.tscn
