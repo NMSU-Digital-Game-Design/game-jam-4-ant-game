@@ -18,6 +18,7 @@ enum Team { PLAYER, ENEMY }
 @export var upgrade_health_bonus : int = 150
 @export var upgrade_damage_bonus : float = 8
 @export var upgrade_rate_bonus : float = 0.2
+@export var upgrade_food_production: float = 5
 
 # troop costs
 @export var ant_cost : int = 20
@@ -100,6 +101,7 @@ func upgrade():
 	health += upgrade_health_bonus
 	weapon_damage += upgrade_damage_bonus
 	weapon_fire_rate += upgrade_rate_bonus
+	food_per_second += upgrade_food_production
 	scale += Vector2(0.03, 0.03)
 	if team == Team.PLAYER:
 		update_ui()
@@ -140,3 +142,7 @@ func _on_body_entered(body):
 # base ant deployment
 func _on_ant_pressed() -> void:
 	deploy()
+	
+# upgrade player base
+func _on_upgrade_health_button_pressed() -> void:
+	upgrade()
