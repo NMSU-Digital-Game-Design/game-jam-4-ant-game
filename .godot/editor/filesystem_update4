@@ -1,3 +1,4 @@
 res://Scenes/main.tscn
 res://Scenes/ui.tscn
 res://Scenes/Projectile.tscn
+res://Scripts/camera.gd
