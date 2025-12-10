@@ -1,0 +1,228 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8jiff0bef3c4"]
+
+[ext_resource type="Script" uid="uid://bc50q11x1ielh" path="res://Scenes/ui.gd" id="1_nf4gj"]
+[ext_resource type="Texture2D" uid="uid://c8ujhcbwpmiye" path="res://Assets/meat.png" id="1_ohol1"]
+[ext_resource type="Texture2D" uid="uid://dq1sxe6ouphso" path="res://Assets/ant.jpg" id="2_tanvq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nf4gj"]
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_nltto"]
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_ohol1"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_2246s"]
+font_size = 12
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_nf4gj")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -107.0
+offset_right = 137.0
+offset_bottom = 134.0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.207843, 0.113725, 0.0392157, 0.596078)
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(0.159541, 0.0826716, 0.0240098, 1)
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="Health" type="Panel" parent="Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HealthBar" type="ProgressBar" parent="Panel/Margin/VBox/Health"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="Panel/Margin/VBox/Health/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ddd"
+label_settings = SubResource("LabelSettings_nf4gj")
+horizontal_alignment = 1
+
+[node name="Upgrade" type="Panel" parent="Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="UpgradeHealth" type="Button" parent="Panel/Margin/VBox/Upgrade"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Margin/VBox/Upgrade/UpgradeHealth"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/VBox/Upgrade/UpgradeHealth/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Upgrade Anthill"
+label_settings = SubResource("LabelSettings_nltto")
+horizontal_alignment = 1
+
+[node name="HBox2" type="HBoxContainer" parent="Panel/Margin/VBox/Upgrade/UpgradeHealth/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Margin/VBox/Upgrade/UpgradeHealth/VBoxContainer/HBox2"]
+layout_mode = 2
+texture = ExtResource("1_ohol1")
+expand_mode = 3
+
+[node name="UpgradeCost" type="Label" parent="Panel/Margin/VBox/Upgrade/UpgradeHealth/VBoxContainer/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+text = "100"
+label_settings = SubResource("LabelSettings_ohol1")
+
+[node name="Summon" type="Panel" parent="Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Button" type="Button" parent="Panel/Margin/VBox/Summon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Margin/VBox/Summon/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Margin/VBox/Summon/Button/VBoxContainer"]
+custom_minimum_size = Vector2(0, 69.55)
+layout_mode = 2
+texture = ExtResource("2_tanvq")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Margin/VBox/Summon/Button/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Margin/VBox/Summon/Button/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_ohol1")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/VBox/Summon/Button/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "20"
+label_settings = SubResource("LabelSettings_2246s")
+
+[node name="FoodAmount" type="Panel" parent="Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Panel/Margin/VBox/FoodAmount"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBox" type="HBoxContainer" parent="Panel/Margin/VBox/FoodAmount/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Margin/VBox/FoodAmount/Panel/HBox"]
+layout_mode = 2
+texture = ExtResource("1_ohol1")
+expand_mode = 3
+
+[node name="FoodLabel" type="Label" parent="Panel/Margin/VBox/FoodAmount/Panel/HBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_nltto")

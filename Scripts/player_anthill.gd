@@ -3,6 +3,9 @@ extends StaticBody2D
 
 enum Team { PLAYER, ENEMY }
 
+signal anthill_died(team)
+
+
 @export var team : Team = Team.PLAYER
 @export var max_health : float = 500
 @export var food_per_second : float = 5
@@ -35,6 +38,13 @@ var enemies_in_range : Array[Node2D] = []
 
 func _ready():
 	health = max_health
+	
+	var ui = get_node("/root/main/UI")
+	
+	ui.upgrade_health_button.connect(_on_upgrade_health_button_pressed)
+	ui.summon_ant_button.connect(_on_ant_pressed)
+
+	
 	
 	# Set correct collision layers so only enemy ants trigger body_entered
 	collision_layer = 8 if team == Team.PLAYER else 16   # layer 8 = player hill, 16 = enemy hill
@@ -91,6 +101,7 @@ func take_damage(amount : float):
 
 func die():
 	print("Anthill destroyed! Team: ", "Player" if team == Team.PLAYER else "Enemy")
+	anthill_died.emit(team)
 	queue_free()
 
 # ---------- Upgrades (Player only) ----------
@@ -118,12 +129,12 @@ func deploy():
 
 # ---------- UI (Player only) ----------
 func update_ui():
-	var ui = get_node_or_null("/root/main/UI")
+	var ui = get_node_or_null("/root/main/UI/Panel/Margin/VBox")
 	if ui:
-		ui.get_node("FoodLabel").text = "Food: " + str(int(food))
-		ui.get_node("HealthBar").max_value = max_health
-		ui.get_node("HealthBar").value = health
-		ui.get_node("HealthLabel").text = "%d / %d" % [health, max_health]
+		ui.get_node("FoodAmount/Panel/HBox/FoodLabel").text = "" + str(int(food))
+		ui.get_node("Health/HealthBar").max_value = max_health
+		ui.get_node("Health/HealthBar").value = health
+		ui.get_node("Health/HealthBar/HealthLabel").text = "%d / %d" % [health, max_health]
 
 # ---------- Weapon range signals ----------
 func _on_weapon_range_body_entered(body):
@@ -142,7 +153,6 @@ func _on_body_entered(body):
 # base ant deployment
 func _on_ant_pressed() -> void:
 	deploy()
-	
 # upgrade player base
 func _on_upgrade_health_button_pressed() -> void:
 	upgrade()
